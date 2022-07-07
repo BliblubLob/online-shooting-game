@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 //this sets static folders as middle ware to connect to server
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'../public')));
 
 
 //run when client connects

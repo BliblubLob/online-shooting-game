@@ -1,4 +1,5 @@
-const socket = io('https://nameless-inlet-82361.herokuapp.com/');
+const socket = io('http://localhost:5000/');
+//'https://nameless-inlet-82361.herokuapp.com/'
 const chatbox = document.getElementById('chatbox')
 const msgbox = document.getElementById('msg')
 const leave = document.getElementById('leave')

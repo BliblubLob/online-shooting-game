@@ -1,5 +1,5 @@
 {
-  "name": "learn-node-js",
+  "name": "server",
   "version": "1.0.0",
   "description": "Multiplayer game",
   "main": "server.js",
