@@ -7,7 +7,15 @@ const game_container = document.getElementById('game_container')
 const {user_name,room_number} = Qs.parse(location.search, {ignoreQueryPrefix: true}) //{ignore}
 // IMPORTANT: variable above needs to have the same 'name' of the input in html tags
 console.log(user_name,room_number)
+
+if(user_name == null || room_number == null||user_name == 0|| room_number == 0 ){
+    confirm ('you did not enter name or room number')
+    window.location = 'gate.html'
+
+}
+
 socket.emit('join_room',{user_name,room_number})
+
 
 socket.on('make_host',()=>{
     make_start()

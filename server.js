@@ -18,8 +18,13 @@ io.on('connection', socket => {
     console.log('new connection');
 
     var my_interval
+    
     //when client joins a room from gate.html, pass the username and room_no.
     socket.on('join_room', ( {user_name,room_number} )=>{
+        //Forces disconnect if user did not enter username or room number
+        if (user_name == null || room_number == null||user_name == 0|| room_number == 0 ){
+            socket.disconnect()
+        }
 
         console.log(user_name,room_number)
         //add user into userlist
