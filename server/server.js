@@ -1,26 +1,33 @@
 const path = require('path');
 const express = require('express');
 
-const http = require('http');
-var cors = require('cors');
-var https = require('https');
 const {createProxyMiddleware} = require('http-proxy-middleware');
 
-const socketio = require('socket.io');
 const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_room,process_all_room} = require('./utils/user')
 
 
+
+
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+const httpServer = createServer();
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*"
+  }
+});
 //const app = express();
-const httpServer = http.createServer();
-const io = new socketio.Server(httpServer, {
-    cors: {
-        allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
-        exposedHeaders: ["authorization"], // you can change the headers
-        origin: "*",
-        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-        preflightContinue: false
-    },
-  });
+// const httpServer = http.createServer();
+// const io = new socketio.Server(httpServer, {
+//     cors: {
+//         allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
+//         exposedHeaders: ["authorization"], // you can change the headers
+//         origin: "*",
+//         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//         preflightContinue: false
+//     },
+//   });
 //allow other servers to access
 // app.use(
 // cors({
