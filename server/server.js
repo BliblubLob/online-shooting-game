@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 
+import cors from "cors";
 const {createProxyMiddleware} = require('http-proxy-middleware');
 
 const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_room,process_all_room} = require('./utils/user')
@@ -11,10 +12,17 @@ const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_
 import { createServer } from "http";
 import { Server } from "socket.io";
 
-const httpServer = createServer();
+const app = express();
+app.use(cors())
+const httpServer = createServer(app);
+
 const io = new Server(httpServer, {
   cors: {
-    origin: "*"
+        allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
+        exposedHeaders: ["authorization"], // you can change the headers
+        origin: "*",
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        preflightContinue: false
   }
 });
 //const app = express();
