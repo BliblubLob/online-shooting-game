@@ -10,8 +10,8 @@ const socketio = require('socket.io');
 const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_room,process_all_room} = require('./utils/user')
 
 
-const app = express();
-const server = http.createServer(app);
+//const app = express();
+//const server = http.createServer(app);
 const io = socketio();
 
 //allow other servers to access
