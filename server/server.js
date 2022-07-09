@@ -1,6 +1,10 @@
 const path = require('path');
 const express = require('express');
+
 const http = require('http');
+var https = require('https');
+const {createProxyMiddleware} = require('http-proxy-middleware');
+
 const socketio = require('socket.io');
 const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_room,process_all_room} = require('./utils/user')
 
@@ -10,7 +14,9 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 //this sets static folders as middle ware to connect to server
-app.use(express.static(path.join(__dirname,'../public')));
+app.use('/api', createProxyMiddleware({ target: 'https://unrivaled-dasik-33d573.netlify.app', changeOrigin: true }));
+//../public
+//https://unrivaled-dasik-33d573.netlify.app
 
 
 //run when client connects
