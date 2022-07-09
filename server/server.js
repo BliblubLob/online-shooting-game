@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 
 const http = require('http');
+var cors = require('cors');
 var https = require('https');
 const {createProxyMiddleware} = require('http-proxy-middleware');
 
@@ -12,6 +13,9 @@ const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+
+//allow other servers to access
+app.use(cors())
 
 //this sets static folders as middle ware to connect to server
 app.use('/api', createProxyMiddleware({ target: 'https://unrivaled-dasik-33d573.netlify.app', changeOrigin: true }));
