@@ -11,9 +11,12 @@ const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_
 
 
 //const app = express();
-//const server = http.createServer(app);
-const io = socketio();
-
+const server = http.createServer(app);
+const io = new socket_io.Server(httpServer, {
+    cors: {
+      origin: "https://unrivaled-dasik-33d573.netlify.app",
+    },
+  });
 //allow other servers to access
 // app.use(
 // cors({
