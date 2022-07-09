@@ -12,7 +12,7 @@ const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio();
 
 //allow other servers to access
 // app.use(
