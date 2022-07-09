@@ -14,7 +14,11 @@ const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_
 const httpServer = http.createServer();
 const io = new socketio.Server(httpServer, {
     cors: {
-      origin: "*",
+        allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
+        exposedHeaders: ["authorization"], // you can change the headers
+        origin: "*",
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        preflightContinue: false
     },
   });
 //allow other servers to access
