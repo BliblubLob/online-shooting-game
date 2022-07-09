@@ -15,7 +15,15 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 //allow other servers to access
-app.use(cors())
+app.use(
+cors({
+    allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
+    exposedHeaders: ["authorization"], // you can change the headers
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false
+  })
+)
 
 //this sets static folders as middle ware to connect to server
 app.use('/api', createProxyMiddleware({ target: 'https://unrivaled-dasik-33d573.netlify.app', changeOrigin: true }));
