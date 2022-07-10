@@ -1,16 +1,56 @@
 const path = require('path');
 const express = require('express');
-const http = require('http');
-const socketio = require('socket.io');
+
+import cors from "cors";
+const {createProxyMiddleware} = require('http-proxy-middleware');
+
 const {add_game_room,remove_game_room,add_user,get_user, create_player,get_game_room,process_all_room} = require('./utils/user')
 
 
-const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
 
-//this sets static folders as middle ware to connect to server
-app.use(express.static(path.join(__dirname,'../public')));
+
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+const app = express();
+app.use(cors())
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+  cors: {
+        allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
+        exposedHeaders: ["authorization"], // you can change the headers
+        origin: "*",
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        preflightContinue: false
+  }
+});
+//const app = express();
+// const httpServer = http.createServer();
+// const io = new socketio.Server(httpServer, {
+//     cors: {
+//         allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
+//         exposedHeaders: ["authorization"], // you can change the headers
+//         origin: "*",
+//         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//         preflightContinue: false
+//     },
+//   });
+//allow other servers to access
+// app.use(
+// cors({
+//     allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
+//     exposedHeaders: ["authorization"], // you can change the headers
+//     origin: "*",
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     preflightContinue: false
+//   })
+// )
+
+// //this sets static folders as middle ware to connect to server
+// app.use('/api', createProxyMiddleware({ target: 'https://unrivaled-dasik-33d573.netlify.app', changeOrigin: true }));
+// //../public
+// //https://unrivaled-dasik-33d573.netlify.app
 
 
 //run when client connects
