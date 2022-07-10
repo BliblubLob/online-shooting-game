@@ -1,4 +1,4 @@
-const socket = io('https://nameless-inlet-82361.herokuapp.com/');
+const socket = io('https://floating-bayou-78164.herokuapp.com/');
 //'https://nameless-inlet-82361.herokuapp.com/'
 const chatbox = document.getElementById('chatbox')
 const msgbox = document.getElementById('msg')
